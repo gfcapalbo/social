@@ -9,7 +9,7 @@ from werkzeug.wrappers import Request
 from werkzeug.test import EnvironBuilder
 from lxml.html.soupparser import fromstring
 from lxml.etree import tostring
-from base64 import encodebytes
+from base64 import encodestring
 from email.mime.image import MIMEImage
 from odoo.http import root as root_wsgi
 import threading
@@ -120,5 +120,5 @@ class IrMailServer(models.Model):
                     email.attach(filepart)
                     img.set('src', 'cid:%s' % (cid))
                 # encodebytes will put a newline every 74 char
-                part.set_payload(encodebytes(tostring(root)))
+                part.set_payload(encodestring(tostring(root)))
         return email
