@@ -80,8 +80,7 @@ class IrMailServer(models.Model):
                 body = part.get_payload(decode=True)
                 if not body or body == '\n':
                     continue
-                root = fromstring(body)
-                self.process_img_body(root, email)
+                root = self.process_img_body(fromstring(body), email)
                 # encodestring will put a newline every 74 char
                 part.set_payload(encodestring(tostring(root)))
         return email
@@ -115,6 +114,7 @@ class IrMailServer(models.Model):
             # attach the image into the email as attachment
             email.attach(filepart)
             img.set('src', 'cid:%s' % (cid))
+        return root
 
     def fetch_image(self, image_path):
         env = EnvironBuilder(image_path).get_environ()
