@@ -9,14 +9,11 @@ from odoo.addons.mail.tests.common import TestMail
 
 class TestMailEmbedImage(TestMail):
 
-    post_install = True
-
-    def test_mail_embed_image(self):
-        """We pass a mail with <img src="..." /> tags to build_email,
-        and then look into the result, check there were attachments
-        created and you find xpaths like //img[src] have a cid"""
+    @classmethod
+    def setupClass(cls):
+        super(TestMailEmbedImage, cls).setUpClass()
         # DATA
-        base_url = self.env['ir.config_parameter'].get_param(
+        base_url = cls.env['ir.config_parameter'].get_param(
             'web.base.url')
         image_url = base_url + \
             '/mail_embed_image/static/description/icon.png'
@@ -35,12 +32,17 @@ class TestMailEmbedImage(TestMail):
         email_from = 'test@example.com'
         email_to = 'test@example.com'
         subject = 'test mail'
-        # END DATA
-        res = self.env['ir.mail_server'].build_email(
+        cls.email = cls.env['ir.mail_server'].build_email(
             email_from, email_to, subject,
             body, subtype='html', subtype_alternative='plain')
+        # END DATA
+
+    def test_mail_embed_image(self):
+        """We pass a mail with <img src="..." /> tags to build_email,
+        and then look into the result, check there were attachments
+        created and you find xpaths like //img[src] have a cid"""
         images_in_mail = 0
-        for part in res.walk():
+        for part in self.email.walk():
             if part.get_content_type() == 'text/html':
                 # we do not search in text, just in case that texts exists in
                 # the text elsewhere (not probable, but this is better)
@@ -53,5 +55,5 @@ class TestMailEmbedImage(TestMail):
         self.assertEqual(images_in_mail, 1)
         # verify 1 attachment present
         self.assertEqual([
-            x.get_content_type() for x in res.walk() if x.get_content_type(
-                ).startswith('image/')], ['image/png'])
+            x.get_content_type() for x in self.email.walk(
+            ) if x.get_content_type().startswith('image/')], ['image/png'])
