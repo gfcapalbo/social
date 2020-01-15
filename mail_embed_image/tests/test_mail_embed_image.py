@@ -9,11 +9,10 @@ from odoo.addons.mail.tests.common import TestMail
 
 class TestMailEmbedImage(TestMail):
 
-    @classmethod
-    def setupClass(cls):
-        super(TestMailEmbedImage, cls).setUpClass()
+    def setUp(self):
+        super(TestMailEmbedImage, self).setUp()
         # DATA
-        base_url = cls.env['ir.config_parameter'].get_param(
+        base_url = self.env['ir.config_parameter'].get_param(
             'web.base.url')
         image_url = base_url + \
             '/mail_embed_image/static/description/icon.png'
@@ -32,7 +31,7 @@ class TestMailEmbedImage(TestMail):
         email_from = 'test@example.com'
         email_to = 'test@example.com'
         subject = 'test mail'
-        cls.email = cls.env['ir.mail_server'].build_email(
+        self.email = self.env['ir.mail_server'].build_email(
             email_from, email_to, subject,
             body, subtype='html', subtype_alternative='plain')
         # END DATA
