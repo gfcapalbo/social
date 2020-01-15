@@ -4,7 +4,7 @@
 from base64 import b64encode
 from lxml import html
 from requests import get
-from odoo.tests.common import TestMail
+from odoo.addons.mail.tests.common import TestMail
 
 
 class TestMailEmbedImage(TestMail):
