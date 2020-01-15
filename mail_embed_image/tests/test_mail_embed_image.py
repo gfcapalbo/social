@@ -2,12 +2,12 @@
 # Copyright 2019 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from base64 import b64encode
-from odoo.tests import common
 from lxml import html
 from requests import get
+from odoo.tests.common import TestMail
 
 
-class TestMailEmbedImage(common.TransactionCase):
+class TestMailEmbedImage(TestMail):
 
     post_install = True
 
