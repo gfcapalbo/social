@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-extend="mail.chat.ChannelsPreview" t-name="ChannelsPreviewExtend">
+        <t t-jquery="t[t-set='status']" t-operation="after">
+            <t t-set="status_description" t-value="channel.status_description"></t>
+        </t>
+    </t>
+    <t t-extend="mail.chat.UserStatus" t-name="ChatUserStatusExtend">
+        <t t-jquery="\\i[0]" t-operation="before">
+            <t t-if="status_description">
+                <t t-esc="status_description">
+                </t>
+            </t>
+        </t>
+    </t>
+</templates>

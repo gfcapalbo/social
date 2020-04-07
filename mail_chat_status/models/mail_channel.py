@@ -1,39 +1,6 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from email.utils import formataddr
-
-import re
-import uuid
-
-from odoo import _, api, fields, models, modules, tools
-from odoo.exceptions import UserError
-from odoo.osv import expression
-from odoo.tools import ormcache
-from odoo.tools.safe_eval import safe_eval
-
-
-class BusPresenceType(models.Model):
-    _name = 'bus.presence.type'
-
-    present = fields.Boolean()
-    description = fields.Char()
-
-    """
-    Insert data records
-        present = TRUE
-        NAME:
-        'Avaliable'
-        'In the Zone'
-        'In conference'
-
-        Present = False
-        NAME:
-         'LUNCH'
-         'BREAK'
-    """
-
-
+from odoo import api, fields, models
 
 
 class BusPresence(models.Model):
@@ -51,19 +18,22 @@ class BusPresence(models.Model):
     We will also add the possibility to change status description
     manually.
     """
-    status_description = fields.Many2one(
-        'bus.presence.type'
-        compute='_compute_status_description'
-        inverse='_inverse_status_description'
 
-    @depends('status')
-    def _compute_status_description(self):
-        if self.status == 'online':
-            # this will take care of automatic unsetting
-            self.status_description = self.env.ref(
-                'XMLID of available state')
+    no_presence = [('away', 'Away'), ('lunch', 'Lunch')]
+    presence = [
+        ('available', 'Available'),
+        ('concentrated', 'Concentrated'),
+        ('meeting', 'Meeting/client'), ]
+    presence_no_presence = no_presence + presence
 
+    presence = fields.Boolean(compute='compute_presence')
+    status_description = fields.Selection(
+        presence_no_presence, default='available', required=True)
 
-    def _inverse_status_description(self):
-        if self.status_description.
-
+    @api.depends('status_desctiption')
+    def compute_presence(self):
+        for this in self:
+            if this.status_description in zip(*self.presence)[0]:
+                this.presence = True
+                continue
+            this.presence = False

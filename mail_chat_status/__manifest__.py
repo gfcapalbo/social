@@ -12,10 +12,9 @@
         'mail',
     ],
     "data": [
-        'views/templates.xml',
-        'security/ir.model.access.csv',
     ],
     "qweb": [
+        'views/chat_extension.xml',
     ],
     "test": [
     ],
