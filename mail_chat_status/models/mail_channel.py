@@ -19,21 +19,21 @@ class BusPresence(models.Model):
     manually.
     """
 
-    no_presence = [('away', 'Away'), ('lunch', 'Lunch')]
-    presence = [
+    not_present = [('away', 'Away'), ('lunch', 'Lunch')]
+    present = [
         ('available', 'Available'),
         ('concentrated', 'Concentrated'),
         ('meeting', 'Meeting/client'), ]
-    presence_no_presence = no_presence + presence
+    present_not_present = not_present + present
 
     presence = fields.Boolean(compute='compute_presence')
     status_description = fields.Selection(
-        presence_no_presence, default='available', required=True)
+        present_not_present, default='available', required=True)
 
-    @api.depends('status_desctiption')
+    @api.depends('status_description')
     def compute_presence(self):
         for this in self:
-            if this.status_description in zip(*self.presence)[0]:
+            if this.status_description in zip(*self.present)[0]:
                 this.presence = True
                 continue
             this.presence = False

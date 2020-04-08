@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-name="mail_chat_status">
+        <li class="o_mail_navbar_item">
+            <a title="Status"
+               class="dropdown-toggle o-user-systray-status"
+               data-toggle="dropdown"
+               aria-expanded="false"
+               href="#"
+               />
+         <ul class="dropdown-menu o-user-presence-dropdown" role="menu">
+
+                <li>
+                    <a name="lunch" class="o-user-status-select" href="#">
+                        <i t-attf-class="o_mail_user_status o_user_online fa fa-circle" />
+                        Lunch
+                    </a>
+                </li>
+                <li>
+                    <a name="away" class="o-user-status-select" href="#">
+                        <i class="o_mail_user_status o_user_idle fa fa-circle" />
+                        Away
+                    </a>
+                </li>
+                <li>
+                    <a name="available" class="o-user-status-select" href="#">
+                        <i class="o_mail_user_status fa fa-circle-o" />
+                        Available
+                    </a>
+                </li>
+                <li>
+                    <a name="concentrated" class="o-user-status-select" href="#">
+                        <i class="o_mail_user_status fa fa-circle-o" />
+                        Concentrated
+                    </a>
+                </li>
+                <li>
+                    <a name="Meeting" class="o-user-status-select" href="#">
+                        <i class="o_mail_user_status fa fa-circle-o" />
+                        Meeting/Client
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </t>
+
+</templates>

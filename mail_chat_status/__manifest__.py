@@ -14,7 +14,7 @@
     "data": [
     ],
     "qweb": [
-        'views/chat_extension.xml',
+        'static/src/xml/chat_extension.xml',
     ],
     "test": [
     ],
