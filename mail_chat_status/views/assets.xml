@@ -4,7 +4,7 @@
         <template id="assets_backend" name="mail_chat_status assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
                 <script type="text/javascript" src="/mail_chat_status/static/src/js/mail_chat_status.js"></script>
-                <script type="stylesheet" href="/mail_chat_status/static/src/less/mail_chat_status.js"></script>
+                <script type="stylesheet" href="/mail_chat_status/static/src/less/mail_chat_status.less"></script>
             </xpath>
         </template>
     </data>

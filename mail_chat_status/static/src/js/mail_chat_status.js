@@ -1,4 +1,4 @@
-odoo.define('mail_chat_statis', function (require) {
+odoo.define('mail_chat_status', function (require) {
     "use strict";
 
     var Bus = require('bus.bus').bus;
