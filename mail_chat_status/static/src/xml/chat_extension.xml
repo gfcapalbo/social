@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
-
+ <!--
     <t t-name="mail_chat_status">
         <li class="o_mail_navbar_item">
             <a title="Status"
@@ -43,6 +43,16 @@
                 </li>
             </ul>
         </li>
+    </t>
+ -->
+    <t t-extend="mail.chat.SidebarItems">
+        <t t-jquery=".o_channel_name" t-operation="append">
+            <p t-if="channel_type == 'dm'">
+                    <t t-esc="channel.status"></t> 
+                    <t t-esc="channel.direct_partner"></t>
+                    <t t-esc="channel.status_description"></t>
+            </p>
+        </t>
     </t>
 
 </templates>

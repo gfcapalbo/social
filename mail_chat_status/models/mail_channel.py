@@ -3,8 +3,8 @@
 from odoo import api, fields, models
 
 
-class BusPresence(models.Model):
-    _inherit = 'bus.presence'
+class ResUser(models.Model):
+    _inherit = 'res.users'
 
     """
     bus presence is used by chat_manager js

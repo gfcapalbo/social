@@ -12,7 +12,7 @@
         'mail',
     ],
     "data": [
-        'views/assets.xml',
+   #     'views/assets.xml',
     ],
     "qweb": [
         'static/src/xml/chat_extension.xml',
